@@ -16,6 +16,8 @@ I reused part of [this code](https://github.com/araobp/acoustic-features/tree/ma
 
 The DSP part used [JTransforms](https://github.com/wendykierp/JTransforms).
 
+I confirmed that the app runs on LG Nexus 5X.
+
 ## Training CNN
 
 This is a notebook for training a CNN model for musical instruments recognition: [Jypyter notebook](./keras/training.ipynb)

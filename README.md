@@ -7,3 +7,60 @@ This app is for both train data collection and inference for acoustic event dete
 ## Training CNN
 
 This is a notebook for training CNN: [Jypyter notebook](./keras/training.ipynb)
+
+## Audio processing pipeline for extracting audio feature from PCM audio
+
+### Training data collection on Android (smart phone)
+
+```
+   << MEMS mic >>
+         |
+         V
+  [16bit PCM data]
+         |
+  [ Pre-emphasis ]
+         |
+[Overlapping frames (50%)]
+         |
+  [Windowing(hann)]
+         |
+  [   Real FFT   ]
+         |
+  [     PSD      ]
+         |
+  [Filterbank(MFSCs)]
+         |
+     [Log scale]
+         |
+         V
+ << Audio feature >>
+
+```
+
+### Training CNN on Keras
+
+```
+ << Audio feature >>
+         |
+         V
+   [CNN training]
+         |
+         V
+ [Keras model(.h5)]
+         |
+         V
+ << TFLite model >>
+
+```
+
+### Run inference on Android
+
+```
+ << Audio feature >>
+         |
+         V
+   [Trained CNN]
+         |
+         V
+   << Results >>
+```

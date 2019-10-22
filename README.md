@@ -8,6 +8,8 @@ I develop an Android app "spectrogram" to run TensorFlow Lite on my smart phone 
 
 And [the other screenshots](./SCREENSHOTS.md).
 
+Note: this app can be used for other use cases such as key word detection.
+
 ## Android app "spectrogram"
 
 This app is for both train data collection and inference for acoustic event detection: [code](./android)

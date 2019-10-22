@@ -2,13 +2,11 @@
 
 I traveled [Okinawa](https://en.wikipedia.org/wiki/Okinawa_Island) last summer, and Okinawan music was amazing.
 
-I develop an Android app "spectrogram" to run [TensorFlow Lite](https://www.tensorflow.org/lite?hl=ja) on my smart phone to study Okinawa music.
+I develop an Android app "spectrogram" to run [TensorFlow Lite](https://www.tensorflow.org/lite?hl=ja) on my smart phone to study Okinawa music. The app can also be used for other use cases such as key word detection.
 
 ![android_app](./doc/android_app.png)
 
 And [the other screenshots](./SCREENSHOTS.md).
-
-Note: this app can be used for other use cases such as key word detection.
 
 ## Android app "spectrogram"
 

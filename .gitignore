@@ -19,6 +19,7 @@ release/
 .gradle/
 build/
 
+
 # Local configuration file (sdk path, etc)
 local.properties
 
@@ -80,3 +81,34 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+
+Java.gitignore
+
+# OpenCV Android SDK
+OpenCV-android-sdk/
+*.so
+openCVLibrary343/
+
+# Android studio
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+/data/*.wav
+
+
+

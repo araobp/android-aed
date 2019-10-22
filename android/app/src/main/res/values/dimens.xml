@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spinner_width">120sp</dimen>
+    <dimen name="button_line_height">40dp</dimen>
+    <dimen name="inference_text_size">18sp</dimen>
+</resources>

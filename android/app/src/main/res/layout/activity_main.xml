@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_land"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="left"
+    android:orientation="vertical"
+    android:screenOrientation="landscape">
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:elevation="10dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutControl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#C0C0C0" />
+
+        <TextView
+            android:id="@+id/textViewInference"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#17246D"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/inference_text_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_line_height"
+            android:background="@color/defaultBackground"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Class label:" />
+
+            <Spinner
+                android:id="@+id/spinnerClasses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButtonWave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wave" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonPSD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PSD" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonSpectrogram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Spec" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonMFSCs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="MFSC" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonFilterbank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Filterbank" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/defaultBackground"
+            android:paddingLeft="4dp">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonRecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:textOff="RECORD"
+                android:textOn="RECORD" />
+
+            <!--
+            <ToggleButton
+                android:id="@+id/toggleButtonPreEmphasis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:textOff="PRE"
+                android:textOn="PRE" />
+            -->
+
+            <Button
+                android:id="@+id/buttonPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Play" />
+
+            <Button
+                android:id="@+id/buttonClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Class" />
+
+            <Button
+                android:id="@+id/buttonSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Setting" />
+
+            <Button
+                android:id="@+id/buttonFeature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feature" />
+
+            <Switch
+                android:id="@+id/switchSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:padding="8dp"
+                android:text = "Save" />
+
+            <TextView
+                android:id="@+id/textViewFileCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

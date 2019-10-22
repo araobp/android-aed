@@ -81,6 +81,10 @@ The audio feature corresponds to gray-scale image the size of 64(W) x 40(H).
 
 ## References
 
+### Speech processing for machine learning
+
+- https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html
+
 ### Sanshin
 
 I bought [Kankara sanshin](https://www.machidaya.jp/en/shop/kankara-sansin-en/kankarasanshin-en/kankara-sanshin-shamisen-diy-kit-%EF%BC%8B-e-learning/) after the visit, and practiced a few of popular Okinawan music including Tinsagnuhana, Shimauta and Nadasousou.

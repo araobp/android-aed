@@ -1,5 +1,7 @@
 # Acoustic Event Detection with TensorFlow Lite
 
+This project is a remake of https://github.com/araobp/acoustic-features/tree/master/stm32/acoustic_feature_camera.
+
 ## Android app "spectrogram"
 
 This app is for both train data collection and inference for acoustic event detection: [code](./android)

@@ -1,8 +1,8 @@
 # Acoustic Event Detection with TensorFlow Lite
 
-I traveled [Okinawa](https://en.wikipedia.org/wiki/Okinawa_Island) last summer, and Okinawa music was amazing.
+I traveled [Okinawa](https://en.wikipedia.org/wiki/Okinawa_Island) last summer, and Okinawan music was amazing.
 
-I develop "Deeplearing for Audio" to run AI on my smart phone to study Okinawa music.
+I develop an Android app "spectrogram" to run TensorFlow Lite on my smart phone to study Okinawa music.
 
 ![android_app](./doc/android_app.png)
 

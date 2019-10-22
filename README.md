@@ -59,6 +59,7 @@ The notebook generates two files, "labels.txt" and "aed.tflite". I place the fil
          |
      [Log scale]
          |
+   [Normalzation]  0-255 range (like grayscale image)
          V
  << Audio feature >>
 

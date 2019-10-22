@@ -14,6 +14,12 @@ The following "audio features" are screen shots of the android app that captured
 
 ![](./doc/android_app_spec.png)
 
+## Mel-frequency spectral coefficients
+
+I trained a CNN model for musical instruments recognition and run it on the Android app.
+
+![](./doc/android_app.png)
+
 ## Mel-filterbank
 
 ![](./doc/android_app_filterbank.png)

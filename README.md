@@ -20,7 +20,7 @@ I confirmed that the app runs on LG Nexus 5X. The code is short and self-explana
 
 ## Training CNN
 
-This is a notebook for training a CNN model for musical instruments recognition: [Jypyter notebook](./keras/training.ipynb)
+This is a notebook for training a CNN model for musical instruments recognition: [Jupyter notebook](./keras/training.ipynb)
 
 The audio feature corresponds to gray-scale image the size of 64(W) x 40(H).
 

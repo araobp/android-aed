@@ -1,8 +1,8 @@
 # Acoustic Event Detection with TensorFlow Lite
 
-I traveled [Okinawa](https://en.wikipedia.org/wiki/Okinawa_Island) last summer, and Okinawan music was amazing.
+I traveled **[Okinawa](https://en.wikipedia.org/wiki/Okinawa_Island)** in Japan last summer, and Okinawan music was amazing.
 
-I develop an Android app "spectrogram" to run [TensorFlow Lite](https://www.tensorflow.org/lite?hl=ja) on my smart phone to study Okinawa music. The app can also be used for other use cases such as key word detection.
+I develop an Android app **"spectrogram"** to run [TensorFlow Lite](https://www.tensorflow.org/lite?hl=ja) on my smart phone to study Okinawa music. The app can also be used for other use cases such as key word detection.
 
 ![android_app](./doc/android_app.png)
 
@@ -16,9 +16,22 @@ I reused part of [this code](https://github.com/araobp/acoustic-features/tree/ma
 
 The DSP part used [JTransforms](https://github.com/wendykierp/JTransforms).
 
+I confirmed that the app runs on LG Nexus 5X. The code is short and self-explanatory, but I must explain that the app saves all the feature files in JSON format under "/Android/media/audio.processing.spectrogram".
+
+I developed a color map function "Coral reef sea" on my own to convert grayscale image into the sea in Okinawa.
+
+```
+    private fun applyColorMap(src: IntArray, dst: IntArray) {
+        for (i in src.indices) {
+            val mag = src[i]
+            dst[i] = Color.argb(0xff, 128 - mag / 2, mag, 128 + mag / 2)
+        }
+    }
+```
+
 ## Training CNN
 
-This is a notebook for training a CNN model for musical instruments recognition: [Jypyter notebook](./keras/training.ipynb)
+This is a notebook for training a CNN model for musical instruments recognition: [Jupyter notebook](https://nbviewer.jupyter.org/github/araobp/android-aed/blob/master/keras/training.ipynb).
 
 The audio feature corresponds to gray-scale image the size of 64(W) x 40(H).
 
@@ -39,6 +52,8 @@ The notebook generates two files, "labels.txt" and "aed.tflite". I place the fil
 
 ### Training data collection on Android (smart phone)
 
+Basically, short-time FFT is applied to raw PCM data to obtain audio feature as gray-scale image.
+
 ```
    << MEMS mic >>
          |
@@ -49,22 +64,26 @@ The notebook generates two files, "labels.txt" and "aed.tflite". I place the fil
          |
 [Overlapping frames (50%)]
          |
-  [Windowing(hann)]
+     [Windowing]  Hann window
          |
   [   Real FFT   ]
          |
-  [     PSD      ]
+  [     PSD      ]  Absolute values of real FFT / N
          |
-  [Filterbank(MFSCs)]  40 filters
+  [Filterbank(MFSCs)]  40 filters for obtaining Mel frequency spectral coefficients.
          |
-     [Log scale]
+     [Log scale]  20*Log10(x) in DB
+         |
+   [Normalzation]  0-255 range (like grayscale image)
          |
          V
- << Audio feature >>
+ << Audio feature >>  64 bins x 40 mel filters
 
 ```
 
 ### Training CNN on Keras
+
+The steps taked for training a CNN model for Acoustic Event Detection is same as that for classification of grayscale images.
 
 ```
  << Audio feature >>  64 bins x 40 mel filters
@@ -83,7 +102,7 @@ The notebook generates two files, "labels.txt" and "aed.tflite". I place the fil
 ### Run inference on Android
 
 ```
- << Audio feature >>
+ << Audio feature >>  64 bins x 40 mel filters
          |
          V
 [Trained CNN(.tflite)]
@@ -96,7 +115,7 @@ The notebook generates two files, "labels.txt" and "aed.tflite". I place the fil
 
 ### Speech processing for machine learning
 
-- https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html
+I learned audio processing technique for machine learning from [this site](https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html).
 
 ### CameraX by Google
 

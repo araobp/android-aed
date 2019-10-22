@@ -16,7 +16,7 @@ The following "audio features" are screen shots of the android app that captured
 
 ## Mel-frequency spectral coefficients
 
-I trained a CNN model for musical instruments recognition and run it on the Android app.
+I trained a CNN model for musical instruments recognition and ran it on the Android app.
 
 ![](./doc/android_app.png)
 

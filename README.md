@@ -18,6 +18,18 @@ The DSP part used [JTransforms](https://github.com/wendykierp/JTransforms).
 
 I confirmed that the app runs on LG Nexus 5X. The code is short and self-explanatory, but I must explain that the app saves all the feature files in JSON format under "/Android/media/audio.processing.spectrogram".
 
+I developed a color map function on my own to convert grayscale image into the sea in Okinawa.
+
+```
+    private fun applyColorMap(src: IntArray, dst: IntArray) {
+        // Color map "heat"
+        for (i in src.indices) {
+            val mag = src[i]
+            dst[i] = Color.argb(0xff, 128 - mag / 2, mag, 128 + mag / 2)
+        }
+    }
+```
+
 ## Training CNN
 
 This is a notebook for training a CNN model for musical instruments recognition: [Jupyter notebook](https://nbviewer.jupyter.org/github/araobp/android-aed/blob/master/keras/training.ipynb).

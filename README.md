@@ -128,12 +128,14 @@ I bought [Kankara Sanshin](https://www.machidaya.jp/en/shop/kankara-sansin-en/ka
 #### Okinawan songs played by famous artists:
 
 Tinsagnuhana
+- https://www.youtube.com/watch?v=VPKwmGwESqg
 - https://www.youtube.com/watch?v=QUeiw3T0Z9Y&list=RDQUeiw3T0Z9Y&start_radio=1
 
 Toshindoi
 - https://www.youtube.com/watch?v=Q7f9sz6pFhU
 
 Tanchamebushi
+- https://www.youtube.com/watch?v=9Jx-BQjK77U
 - https://www.youtube.com/watch?v=4C2yqzMjC6s
 
 Shimauta

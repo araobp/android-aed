@@ -22,7 +22,6 @@ I developed a color map function on my own to convert grayscale image into the s
 
 ```
     private fun applyColorMap(src: IntArray, dst: IntArray) {
-        // Color map "heat"
         for (i in src.indices) {
             val mag = src[i]
             dst[i] = Color.argb(0xff, 128 - mag / 2, mag, 128 + mag / 2)

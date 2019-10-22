@@ -226,13 +226,11 @@ class Spectrogram(
     }
 
     /**
-     * Grayscale to RGB for visualization
+     * Color map "Coral reef sea"
      */
     private fun applyColorMap(src: IntArray, dst: IntArray) {
-        // Color map "heat"
         for (i in src.indices) {
             val mag = src[i]
-            //intArray[i] = Color.argb(0xff, 255-mag, 255-mag, 255-mag)
             dst[i] = Color.argb(0xff, 128 - mag / 2, mag, 128 + mag / 2)
         }
     }

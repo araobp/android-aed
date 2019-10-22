@@ -1,5 +1,7 @@
 # Screenshots of android app "spectrogram"
 
+The following "audio features" are screen shots of the android app that captured features of ["Shimauta"](https://en.wikipedia.org/wiki/Shima_Uta_(The_Boom_song)) song played by a popluar female singer.
+
 ## Wave form of Sanshin
 
 ![](./doc/android_app_wave.png)
@@ -8,7 +10,7 @@
 
 ![](./doc/android_app_psd.png)
 
-## Spectrogram
+## Spectrogram of vocal and Sanshin
 
 ![](./doc/android_app_spec.png)
 

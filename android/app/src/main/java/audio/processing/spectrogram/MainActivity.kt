@@ -305,7 +305,7 @@ class MainActivity : AppCompatActivity() {
         mSamplingFreq = prefs.getInt("fs", SAMPLING_FREQS[1])
         mFftSize = prefs.getInt("fftSize", FFT_SIZES[2])
         mMelFilterbankSize = prefs.getInt("melFilterbankSize", MEL_FILTERBANK_SIZES[2])
-        mSpecLength = prefs.getInt("specLength", SPEC_LENGTHS[1])
+        mSpecLength = prefs.getInt("specLength", SPEC_LENGTHS[2])
         mFeatureWidth = prefs.getInt("featureWidth", FEATURE_WIDTHS[1])
         mFeatureCenter = prefs.getInt("featureCenter", 64)
 

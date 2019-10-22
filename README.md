@@ -83,7 +83,7 @@ Basically, short-time FFT is applied to raw PCM data to obtain audio feature as 
 
 ### Training CNN on Keras
 
-The steps taked for training a CNN model for Acoustic Event Detection is same as that for classification of grayscale images.
+The steps taken for training a CNN model for Acoustic Event Detection is same as that for classification of grayscale images.
 
 ```
  << Audio feature >>  64 bins x 40 mel filters

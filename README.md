@@ -85,6 +85,10 @@ The audio feature corresponds to gray-scale image the size of 64(W) x 40(H).
 
 - https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html
 
+### CameraX by Google
+
+Although I did not use [CameraX](https://developer.android.com/training/camerax) on the Android app, I am using it at work these days. Its sample code is a source of my image processing skills.
+
 ### Sanshin
 
 I bought [Kankara sanshin](https://www.machidaya.jp/en/shop/kankara-sansin-en/kankarasanshin-en/kankara-sanshin-shamisen-diy-kit-%EF%BC%8B-e-learning/) after the visit, and practiced a few of popular Okinawan music including Tinsagnuhana, Shimauta and Nadasousou.

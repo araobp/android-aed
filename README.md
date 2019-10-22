@@ -12,7 +12,7 @@ And [the other screenshots](./SCREENSHOTS.md).
 
 This app is for both train data collection and inference for acoustic event detection: [code](./android)
 
-I reused part of [https://github.com/araobp/acoustic-features/tree/master/stm32/acoustic_feature_camera] that was written in C language by me.
+I reused part of [this code](https://github.com/araobp/acoustic-features/tree/master/stm32/acoustic_feature_camera) that was written in C language by me for STM32 MCUs.
 
 ## Training CNN
 

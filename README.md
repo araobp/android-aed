@@ -22,6 +22,19 @@ This is a notebook for training a CNN model for musical instruments recognition:
 
 The audio feature corresponds to gray-scale image the size of 64(W) x 40(H).
 
+Converting Keras model into TFLite model is just two lines of code:
+```
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+```
+
+The notebook generates two files, "labels.txt" and "aed.tflite". I place the files under "assets" folder for the Android app:
+```
+-- assets --+-- labels.txt
+            |
+            +-- aed.tflite
+```
+
 ## Audio processing pipeline
 
 ### Training data collection on Android (smart phone)

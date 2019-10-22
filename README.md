@@ -14,6 +14,8 @@ This app is for both train data collection and inference for acoustic event dete
 
 I reused part of [this code](https://github.com/araobp/acoustic-features/tree/master/stm32/acoustic_feature_camera) that was written in C language by me for STM32 MCUs.
 
+The DSP part used [JTransforms](https://github.com/wendykierp/JTransforms).
+
 ## Training CNN
 
 This is a notebook for training a CNN model for musical instruments recognition: [Jypyter notebook](./keras/training.ipynb)

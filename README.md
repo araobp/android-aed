@@ -54,7 +54,7 @@ The audio feature corresponds to gray-scale image the size of 64(W) x 40(H).
 ### Training CNN on Keras
 
 ```
- << Audio feature >>  64 bins x 64 filters
+ << Audio feature >>  64 bins x 40 mel filters
          |
          V
    [CNN training]

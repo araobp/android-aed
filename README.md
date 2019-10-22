@@ -1,16 +1,12 @@
 # Acoustic Event Detection with TensorFlow Lite
 
-I traveled Okinawa last summer, and [Okinawa music] was amazing.
+I traveled [Okinawa](https://en.wikipedia.org/wiki/Okinawa_Island) last summer, and Okinawa music was amazing.
 
 I develop "Deeplearing for Audio" to run AI on my smart phone to study Okinawa music.
-
-(This project is a remake of https://github.com/araobp/acoustic-features.)
 
 ![android_app](./doc/android_app.png)
 
 And [the other screenshots](./SCREENSHOTS.md).
-
-I can play a few of popular Okinawa music including Tinsagnuhana. Shimauta and Nadasousou, with my [Kankara sanshin](https://www.machidaya.jp/en/shop/kankara-sansin-en/kankarasanshin-en/kankara-sanshin-shamisen-diy-kit-%EF%BC%8B-e-learning/).
 
 ## Android app "spectrogram"
 
@@ -76,3 +72,10 @@ This is a notebook for training CNN: [Jypyter notebook](./keras/training.ipynb)
          V
    << Results >>
 ```
+
+## References
+
+### Sanshin
+
+I bought [Kankara sanshin](https://www.machidaya.jp/en/shop/kankara-sansin-en/kankarasanshin-en/kankara-sanshin-shamisen-diy-kit-%EF%BC%8B-e-learning/) after the visit, and practiced a few of popular Okinawa music including Tinsagnuhana. Shimauta and Nadasousou.
+

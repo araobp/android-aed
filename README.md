@@ -91,5 +91,5 @@ Although I did not use [CameraX](https://developer.android.com/training/camerax)
 
 ### Sanshin
 
-I bought [Kankara sanshin](https://www.machidaya.jp/en/shop/kankara-sansin-en/kankarasanshin-en/kankara-sanshin-shamisen-diy-kit-%EF%BC%8B-e-learning/) after the visit, and practiced a few of popular Okinawan music including Tinsagnuhana, Shimauta and Nadasousou.
+I bought [Kankara Sanshin](https://www.machidaya.jp/en/shop/kankara-sansin-en/kankarasanshin-en/kankara-sanshin-shamisen-diy-kit-%EF%BC%8B-e-learning/) after the visit, and practiced a few of popular Okinawan music including Tinsagnuhana, Shimauta and Nadasousou.
 

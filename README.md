@@ -99,7 +99,7 @@ The notebook generates two files, "labels.txt" and "aed.tflite". I place the fil
 
 ### Speech processing for machine learning
 
-- https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html
+I learned audio processing technique for machine learning from [this site](https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html).
 
 ### CameraX by Google
 

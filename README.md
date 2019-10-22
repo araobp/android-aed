@@ -18,7 +18,7 @@ The DSP part used [JTransforms](https://github.com/wendykierp/JTransforms).
 
 I confirmed that the app runs on LG Nexus 5X. The code is short and self-explanatory, but I must explain that the app saves all the feature files in JSON format under "/Android/media/audio.processing.spectrogram".
 
-I developed a color map function on my own to convert grayscale image into the sea in Okinawa.
+I developed a color map function "Coral reef sea" on my own to convert grayscale image into the sea in Okinawa.
 
 ```
     private fun applyColorMap(src: IntArray, dst: IntArray) {

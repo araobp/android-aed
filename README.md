@@ -1,6 +1,6 @@
 # Acoustic Event Detection with TensorFlow Lite
 
-This project is a remake of https://github.com/araobp/acoustic-features/tree/master/stm32/acoustic_feature_camera.
+This project is a remake of https://github.com/araobp/acoustic-features.
 
 ## Android app "spectrogram"
 

@@ -41,6 +41,8 @@ The notebook generates two files, "labels.txt" and "aed.tflite". I place the fil
 
 ### Training data collection on Android (smart phone)
 
+Basically, short-time FFT is applied to raw PCM data to obtain audio feature as gray-scale image.
+
 ```
    << MEMS mic >>
          |
@@ -51,23 +53,26 @@ The notebook generates two files, "labels.txt" and "aed.tflite". I place the fil
          |
 [Overlapping frames (50%)]
          |
-  [Windowing(hann)]
+     [Windowing]  Hann window
          |
   [   Real FFT   ]
          |
-  [     PSD      ]
+  [     PSD      ]  Absolute values of real FFT / N
          |
-  [Filterbank(MFSCs)]  40 filters
+  [Filterbank(MFSCs)]  40 filters for obtaining Mel frequency spectral coefficients.
          |
-     [Log scale]
+     [Log scale]  20*Log10(x) in DB
          |
    [Normalzation]  0-255 range (like grayscale image)
+         |
          V
- << Audio feature >>
+ << Audio feature >>  64 bins x 40 mel filters
 
 ```
 
 ### Training CNN on Keras
+
+The steps taked for training a CNN model for Acoustic Event Detection is same as that for classification of grayscale images.
 
 ```
  << Audio feature >>  64 bins x 40 mel filters
@@ -86,7 +91,7 @@ The notebook generates two files, "labels.txt" and "aed.tflite". I place the fil
 ### Run inference on Android
 
 ```
- << Audio feature >>
+ << Audio feature >>  64 bins x 40 mel filters
          |
          V
 [Trained CNN(.tflite)]

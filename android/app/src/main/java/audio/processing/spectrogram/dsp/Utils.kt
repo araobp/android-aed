@@ -81,7 +81,7 @@ fun waveHeader(dataLen: Int, samplingRate: Int): ByteArray {
  */
 fun savePCM(context: Context, rawPcmData: ShortArray, waveFile: File, samplingRate: Int) {
 
-    var rawData = ByteArray(rawPcmData.size * 2)
+    val rawData = ByteArray(rawPcmData.size * 2)
     for (i in rawPcmData.indices) {
         val sample = rawPcmData[i]
         rawData[2*i] = (sample and 0xff).toByte()

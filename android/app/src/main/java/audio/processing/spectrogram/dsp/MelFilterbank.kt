@@ -11,14 +11,14 @@ import kotlin.math.pow
  * @property N
  * @property numFilters
  */
-class MelFilterbank(val fs: Float, val N: Int = 512, val numFilters: Int = 40) {
+class MelFilterbank(private val fs: Float, private val N: Int = 512, private val numFilters: Int = 40) {
 
-    val nyquistFs = fs/2
+    private val nyquistFs = fs/2
 
-    var filterbank = Array(numFilters+2){FloatArray(FILTER_LENGTH)}
+    private var filterbank = Array(numFilters+2){FloatArray(FILTER_LENGTH)}
     data class KRange(var left: Int, var len: Int)
 
-    var kRangeArray = Array(numFilters + 2){
+    private var kRangeArray = Array(numFilters + 2){
         KRange(
             0,
             0
@@ -28,7 +28,7 @@ class MelFilterbank(val fs: Float, val N: Int = 512, val numFilters: Int = 40) {
     data class MelFilterbankDetails(val kRangeArray: Array<KRange>, val filterbank: Array<FloatArray>)
     val melFilterbankDetails: MelFilterbankDetails
 
-    var signalBuf = FloatArray(N/2)
+    private var signalBuf = FloatArray(N/2)
 
     companion object {
         const val FILTER_LENGTH = 64
@@ -38,12 +38,12 @@ class MelFilterbank(val fs: Float, val N: Int = 512, val numFilters: Int = 40) {
         val melMin = 0F
         val melMax = freqToMel(nyquistFs)
 
-        var melPoints = FloatArray(numFilters+2)
-        var hzPoints = FloatArray(numFilters+2)
+        val melPoints = FloatArray(numFilters+2)
+        val hzPoints = FloatArray(numFilters+2)
 
-        var f = FloatArray(numFilters+2)
+        val f = FloatArray(numFilters+2)
 
-        var deltaMel = (melMax - melMin) / (numFilters + 2)
+        val deltaMel = (melMax - melMin) / (numFilters + 2)
 
         for (m in 0 until numFilters + 2) {
             melPoints[m] = deltaMel * m
@@ -82,7 +82,7 @@ class MelFilterbank(val fs: Float, val N: Int = 512, val numFilters: Int = 40) {
 
 
     fun applyFilterbank(buf: FloatArray) {
-        for (i in 0 until signalBuf.size) {
+        for (i in signalBuf.indices) {
             signalBuf[i] = 0F
         }
 

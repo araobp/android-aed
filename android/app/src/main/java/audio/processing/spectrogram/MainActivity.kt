@@ -22,8 +22,8 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Lifecycle
 import audio.processing.spectrogram.dsp.Spectrogram
 import audio.processing.spectrogram.dsp.savePCM
-import audio.processing.spectrogram.tflite.tflite.AcousticEventDetector
-import audio.processing.spectrogram.tflite.tflite.Classifier
+import audio.processing.spectrogram.tflite.AcousticEventDetector
+import audio.processing.spectrogram.tflite.Classifier
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -289,7 +289,7 @@ class MainActivity : AppCompatActivity() {
 
         // Directory check
         val dir = File(DIR)
-        if (!dir.isDirectory() && !dir.exists()) {
+        if (!dir.isDirectory && !dir.exists()) {
             dir.mkdirs()
         }
 
@@ -309,7 +309,7 @@ class MainActivity : AppCompatActivity() {
         mFeatureWidth = prefs.getInt("featureWidth", FEATURE_WIDTHS[1])
         mFeatureCenter = prefs.getInt("featureCenter", 64)
 
-        var adapterClasses =
+        val adapterClasses =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, mClassLabels)
         adapterClasses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerClasses.adapter = adapterClasses
@@ -702,9 +702,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startRecording() {
-        val rotation = surfaceView.display.rotation
         // TODO: check if the following works on other devices than Nexus5X
-        when (rotation) {
+        when (surfaceView.display.rotation) {
             Surface.ROTATION_0 -> mCurrentRotaionDegrees = 180
             Surface.ROTATION_90 -> mCurrentRotaionDegrees = 270
             Surface.ROTATION_180 -> mCurrentRotaionDegrees = 0

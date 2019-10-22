@@ -5,13 +5,12 @@ package audio.processing.spectrogram.dsp
  *
  * @property impulseResponse
  */
-class FIR(val impulseResponse: FloatArray) {
-    var size: Int
-    var delayLine: FloatArray
-    var cnt = 0
+class FIR(private val impulseResponse: FloatArray) {
+    private var size: Int = impulseResponse.size
+    private var delayLine: FloatArray
+    private var cnt = 0
 
     init {
-        size = impulseResponse.size
         delayLine = FloatArray(size)
     }
 

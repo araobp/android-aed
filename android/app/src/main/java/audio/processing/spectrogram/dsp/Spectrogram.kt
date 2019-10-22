@@ -13,16 +13,16 @@ import kotlin.math.*
  * MFCCs.
  */
 class Spectrogram(
-    val fs: Int,
-    val bufferSizeInShort: Int,
-    val numBlocks: Int,
-    val fftSize: Int = 512,
-    val melFilterbankSize: Int = 40
+    private val fs: Int,
+    bufferSizeInShort: Int,
+    numBlocks: Int,
+    private val fftSize: Int = 512,
+    private val melFilterbankSize: Int = 40
 ) {
 
     companion object {
         const val TAG = "Spec"
-        const val ALPHA = 0.97F  // 0.95 ~ 0.97
+        private const val ALPHA = 0.97F  // 0.95 ~ 0.97
         val PRE_EMPHASIS_MPULSE_RESPONSE = floatArrayOf(-ALPHA, 1.0F)
     }
 
@@ -43,7 +43,7 @@ class Spectrogram(
     private val NUM_FILTERS = melFilterbankSize  // The number of filters in the filterbank
 
     // Spectrogram length corresponding to the size of audio recording
-    var M: Int
+    private var M: Int
 
     // FIR (Finite Impulse Response)
     private var mPreEmphasisFir = FIR(PRE_EMPHASIS_MPULSE_RESPONSE)
@@ -131,7 +131,7 @@ class Spectrogram(
         return mSpectrogram[pos].map { it.toInt() }.toIntArray()
     }
 
-    fun getSpectrogram(normalize: Boolean = true): IntArray {
+    private fun getSpectrogram(normalize: Boolean = true): IntArray {
         var idx = 0
         for (m in mPosSpectrogram until M) {
             val spec = mSpectrogram[m]
@@ -149,7 +149,7 @@ class Spectrogram(
             normalize(mFloatArraySpec, mIntArraySpec)
         } else {
             mFloatArraySpec.forEachIndexed { i, _ ->
-                var s = mFloatArraySpec[i].toInt()
+                val s = mFloatArraySpec[i].toInt()
                 mIntArraySpec[i] = if (s < 0) 0 else (s and 0xff)
             }
         }
@@ -172,7 +172,7 @@ class Spectrogram(
         )
     }
 
-    fun getMfsc(normalize: Boolean = true): IntArray {
+    private fun getMfsc(normalize: Boolean = true): IntArray {
         var idx = 0
         for (m in mPosMfsc until M) {
             val coeffs = mMfsc[m]
@@ -190,7 +190,7 @@ class Spectrogram(
             normalize(mFloatArrayMfsc, mIntArrayMfsc)
         } else {
             mFloatArrayMfsc.forEachIndexed { i, v ->
-                var m = v.toInt()
+                val m = v.toInt()
                 mIntArrayMfsc[i] = if (m < 0) 0 else (m and 0xff)
             }
         }
@@ -231,7 +231,7 @@ class Spectrogram(
     private fun applyColorMap(src: IntArray, dst: IntArray) {
         // Color map "heat"
         for (i in src.indices) {
-            var mag = src[i]
+            val mag = src[i]
             //intArray[i] = Color.argb(0xff, 255-mag, 255-mag, 255-mag)
             dst[i] = Color.argb(0xff, 128 - mag / 2, mag, 128 + mag / 2)
         }

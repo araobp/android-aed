@@ -1,4 +1,4 @@
-package audio.processing.spectrogram.tflite.tflite;
+package audio.processing.spectrogram.tflite;
 
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;

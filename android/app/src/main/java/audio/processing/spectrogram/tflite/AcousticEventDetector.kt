@@ -1,4 +1,4 @@
-package audio.processing.spectrogram.tflite.tflite
+package audio.processing.spectrogram.tflite
 
 import android.app.Activity
 
@@ -12,9 +12,9 @@ class AcousticEventDetector(
     Classifier(activity, device, numThreads, featureWidth, melFilterbankSize) {
 
     companion object {
-        val CLASS_LABELS_FILE = "labels.txt"
-        val MODEL_FILE = "aed.tflite"  // TFLite model for Acoustic Event Detection
-        val NUM_BYTES_PER_CHANNEL = 4  // 32bit float
+        const val CLASS_LABELS_FILE = "labels.txt"
+        const val MODEL_FILE = "aed.tflite"  // TFLite model for Acoustic Event Detection
+        const val NUM_BYTES_PER_CHANNEL = 4  // 32bit float
     }
 
     private var labelProbArray: Array<FloatArray>? = null

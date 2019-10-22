@@ -14,7 +14,9 @@ This app is for both train data collection and inference for acoustic event dete
 
 ## Training CNN
 
-This is a notebook for training CNN: [Jypyter notebook](./keras/training.ipynb)
+This is a notebook for training a CNN model for musical instruments recognition: [Jypyter notebook](./keras/training.ipynb)
+
+The audio feature corresponds to gray-scale image the size of 64(W) x 40(H).
 
 ## Audio processing pipeline
 
@@ -24,9 +26,9 @@ This is a notebook for training CNN: [Jypyter notebook](./keras/training.ipynb)
    << MEMS mic >>
          |
          V
-  [16bit PCM data]
+  [16bit PCM data]  16kHz mono sampling
          |
-  [ Pre-emphasis ]
+  [ Pre-emphasis ]  FIR, alpha = 0.97
          |
 [Overlapping frames (50%)]
          |
@@ -36,7 +38,7 @@ This is a notebook for training CNN: [Jypyter notebook](./keras/training.ipynb)
          |
   [     PSD      ]
          |
-  [Filterbank(MFSCs)]
+  [Filterbank(MFSCs)]  40 filters
          |
      [Log scale]
          |
@@ -48,7 +50,7 @@ This is a notebook for training CNN: [Jypyter notebook](./keras/training.ipynb)
 ### Training CNN on Keras
 
 ```
- << Audio feature >>
+ << Audio feature >>  64 bins x 64 filters
          |
          V
    [CNN training]
@@ -67,7 +69,7 @@ This is a notebook for training CNN: [Jypyter notebook](./keras/training.ipynb)
  << Audio feature >>
          |
          V
-   [Trained CNN]
+[Trained CNN(.tflite)]
          |
          V
    << Results >>

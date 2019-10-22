@@ -125,7 +125,7 @@ Although I did not use [CameraX](https://developer.android.com/training/camerax)
 
 I bought [Kankara Sanshin](https://www.machidaya.jp/en/shop/kankara-sansin-en/kankarasanshin-en/kankara-sanshin-shamisen-diy-kit-%EF%BC%8B-e-learning/) after the visit to Okinawa. After having practiced it very hard, I can now play a few of popular Okinawan music including Tinsagnuhana, Shimauta and Nadasousou.
 
-Okinawan songs played by famous artists:
+#### Okinawan songs played by famous artists:
 
 Tinsagnuhana
 - https://www.youtube.com/watch?v=QUeiw3T0Z9Y&list=RDQUeiw3T0Z9Y&start_radio=1
@@ -142,5 +142,3 @@ Shimauta
 
 Nasasousou
 - https://www.youtube.com/watch?v=pISpugSrtoY
-
-

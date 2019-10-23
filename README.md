@@ -41,7 +41,7 @@ converter = tf.lite.TFLiteConverter.from_keras_model(model)
 tflite_model = converter.convert()
 ```
 
-The notebook generates two files, "labels.txt" and "aed.tflite". I place the files under "assets" folder for the Android app:
+In case of "musical instruments" use case, the notebook generates two files, "musical_instruments-labels.txt" and "musical_instruments.tflite". I rename the files and place them under "assets" folder for the Android app:
 ```
 -- assets --+-- labels.txt
             |

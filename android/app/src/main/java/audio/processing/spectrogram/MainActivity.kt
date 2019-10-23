@@ -471,6 +471,7 @@ class MainActivity : AppCompatActivity() {
                 jsonObject.put("fs", feature.fs)
                 jsonObject.put("fftSize", feature.fftSize)
                 jsonObject.put("melFilterbankSize", feature.melFilterbankSize)
+                jsonObject.put("featureSize", feature.FeatureSize)
                 jsonObject.put("featureCenter", mFeatureCenter)
                 jsonObject.put("featureWidth", mFeatureWidth)
                 jsonObject.put("mfsc", JSONArray(feature.mfsc))

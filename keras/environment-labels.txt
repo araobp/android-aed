@@ -1,0 +1,4 @@
+eacalator
+mall
+station
+train

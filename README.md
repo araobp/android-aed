@@ -31,7 +31,7 @@ I developed a color map function "Coral reef sea" on my own to convert grayscale
 
 ## Training CNN
 
-This is a notebook for training a CNN model for musical instruments recognition: [Jupyter notebook](https://nbviewer.jupyter.org/github/araobp/android-aed/blob/master/keras/training.ipynb).
+This is a notebook for training a CNN model for musical instruments recognition: [Jupyter notebook](https://nbviewer.jupyter.org/github/araobp/android-aed/blob/master/keras/training_musical_instruments.ipynb).
 
 The audio feature corresponds to gray-scale image the size of 64(W) x 40(H).
 

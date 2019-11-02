@@ -31,7 +31,7 @@ I developed a color map function "Coral reef sea" on my own to convert grayscale
 
 ## Training CNN
 
-This is a notebook for training a CNN model for musical instruments recognition: [Jupyter notebook](https://nbviewer.jupyter.org/github/araobp/android-aed/blob/master/keras/training.ipynb).
+This is a notebook for training a CNN model for musical instruments recognition: [Jupyter notebook](https://nbviewer.jupyter.org/github/araobp/android-aed/blob/master/keras/training_musical_instruments.ipynb).
 
 The audio feature corresponds to gray-scale image the size of 64(W) x 40(H).
 
@@ -41,7 +41,7 @@ converter = tf.lite.TFLiteConverter.from_keras_model(model)
 tflite_model = converter.convert()
 ```
 
-The notebook generates two files, "labels.txt" and "aed.tflite". I place the files under "assets" folder for the Android app:
+In case of "musical instruments" use case, the notebook generates two files, "musical_instruments-labels.txt" and "musical_instruments.tflite". I rename the files and place them under "assets" folder for the Android app:
 ```
 -- assets --+-- labels.txt
             |

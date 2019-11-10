@@ -111,6 +111,19 @@ The steps taken for training a CNN model for Acoustic Event Detection is same as
    << Results >>
 ```
 
+## TODO
+
+Data file backup to a file server via WiFi.
+
+```
+[Android] ---- HTTP POST multipart/form-data ----->[Node.js/express]
+                                                           |
+                                                         Files
+                                                           |
+                                                           V
+                                             [Keras/TensorFLow on Jupyter]
+```
+
 ## References
 
 ### Speech processing for machine learning

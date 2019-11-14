@@ -31,7 +31,7 @@ class Spectrogram(
         val fs: Int,
         val fftSize: Int,
         val melFilterbankSize: Int,
-        val FeatureSize: Int,
+        val featureSize: Int,
         val mfsc: IntArray
     )
 
@@ -167,7 +167,7 @@ class Spectrogram(
             fs = fs,
             fftSize = fftSize,
             melFilterbankSize = melFilterbankSize,
-            FeatureSize = M,
+            featureSize = M,
             mfsc = mIntArrayMfsc
         )
     }

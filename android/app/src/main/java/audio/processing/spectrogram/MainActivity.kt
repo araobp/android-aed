@@ -272,6 +272,10 @@ class MainActivity : AppCompatActivity() {
             }
         spinnerFeatureWidth.setSelection(adapterFeatureWidth.getPosition(mFeatureWidth))
 
+        dialog.setOnDismissListener {
+            fullscreen()
+        }
+
         dialog.show()
     }
 
@@ -292,7 +296,7 @@ class MainActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         // Hide the navigation bar
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        fullscreen()
 
         // Directory check
         val dir = File(DIR)
@@ -444,6 +448,7 @@ class MainActivity : AppCompatActivity() {
 
             dialog.setOnDismissListener {
                 spinnerClasses.adapter = adapterClasses
+                fullscreen()
             }
 
             dialog.show()
@@ -478,7 +483,6 @@ class MainActivity : AppCompatActivity() {
                 jsonObject.put("fs", feature.fs)
                 jsonObject.put("fftSize", feature.fftSize)
                 jsonObject.put("melFilterbankSize", feature.melFilterbankSize)
-                jsonObject.put("featureSize", feature.FeatureSize)
                 jsonObject.put("featureCenter", mFeatureCenter)
                 jsonObject.put("featureWidth", mFeatureWidth)
                 jsonObject.put("mfsc", JSONArray(feature.mfsc))
@@ -914,4 +918,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun fullscreen() {
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+    }
 }

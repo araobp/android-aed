@@ -1,8 +1,6 @@
 # Acoustic Event Detection with TensorFlow Lite
 
-I traveled **[Okinawa](https://en.wikipedia.org/wiki/Okinawa_Island)** in Japan last summer, and Okinawan music was amazing.
-
-In this project, I develop an Android app **"spectrogram"** to run [TensorFlow Lite](https://www.tensorflow.org/lite?hl=ja) on my smart phone to study Okinawa music. The app can also be used for other use cases such as key word detection.
+This project is an Android version of my other project [acoustic features](https://github.com/araobp/acoustic-features).
 
 ![android_app](./doc/android_app.png)
 
@@ -16,9 +14,9 @@ I reused part of [this code](https://github.com/araobp/acoustic-features/tree/ma
 
 The DSP part used [JTransforms](https://github.com/wendykierp/JTransforms).
 
-I confirmed that the app runs on LG Nexus 5X. The code is short and self-explanatory, but I must explain that the app saves all the feature files in JSON format under "/Android/media/audio.processing.spectrogram".
+I confirmed that the app runs on Google Pixel4. The code is short and self-explanatory, but I must explain that the app saves all the feature files in JSON format under "/Android/media/audio.processing.spectrogram".
 
-I developed a color map function "Coral reef sea" on my own to convert grayscale image into the sea in Okinawa.
+I developed a color map function "Coral reef sea" on my own to convert grayscale image into a color of the sea in Okinawa.
 
 ```
     private fun applyColorMap(src: IntArray, dst: IntArray) {
@@ -113,47 +111,10 @@ The steps taken for training a CNN model for Acoustic Event Detection is same as
 
 ## TODO
 
-Data file backup to a file server via WiFi.
-
-```
-[Android] ---- HTTP POST multipart/form-data ----->[Node.js/express]
-                                                           |
-                                                         Files
-                                                           |
-                                                           V
-                                             [Keras/TensorFLow on Jupyter]
-```
+I am working on integrating this Android app with the STM32 version [acoustic-features](https://github.com/araobp/acoustic-features).
 
 ## References
 
 ### Speech processing for machine learning
 
 I learned audio processing technique for machine learning from [this site](https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html).
-
-### CameraX by Google
-
-Although I did not use [CameraX](https://developer.android.com/training/camerax) on the Android app, I am using it at work these days. Its sample code is a source of my image processing skills.
-
-### Sanshin
-
-I bought [Kankara Sanshin](https://www.machidaya.jp/en/shop/kankara-sansin-en/kankarasanshin-en/kankara-sanshin-shamisen-diy-kit-%EF%BC%8B-e-learning/) after the visit to Okinawa. After having practiced it very hard, I can now play a few of popular Okinawan music including Tinsagnuhana, Shimauta and Nadasousou.
-
-#### Okinawan songs played by famous artists:
-
-Tinsagnuhana
-- https://www.youtube.com/watch?v=VPKwmGwESqg
-- https://www.youtube.com/watch?v=QUeiw3T0Z9Y&list=RDQUeiw3T0Z9Y&start_radio=1
-
-Toshindoi
-- https://www.youtube.com/watch?v=Q7f9sz6pFhU
-
-Tanchamebushi
-- https://www.youtube.com/watch?v=9Jx-BQjK77U
-- https://www.youtube.com/watch?v=4C2yqzMjC6s
-
-Shimauta
-- https://www.youtube.com/watch?v=TZeUBDF4FPs
-- https://www.youtube.com/watch?v=8foQlu_yW70&list=RDQUeiw3T0Z9Y&index=2
-
-Nasasousou
-- https://www.youtube.com/watch?v=pISpugSrtoY

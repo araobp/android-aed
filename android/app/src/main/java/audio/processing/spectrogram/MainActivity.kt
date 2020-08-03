@@ -52,8 +52,6 @@ class MainActivity : AppCompatActivity() {
 
         const val PREFS_NAME = "mSpectrogram"
 
-        val DIR =
-            Environment.getExternalStorageDirectory().toString() + "/Android/media/audio.processing.spectrogram"
     }
 
     // Paint objects
@@ -134,24 +132,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun fileCnt() {
         var cntAudio = 0
-        try {
-            File(DIR).list()
-                .forEach { filename -> if (regexAudio().matches(filename)) ++cntAudio }
+        var cntFeature = 0
+        var cntFeaturePerLastAudio = 0
 
-            var cntFeature = 0
-            File(DIR).list()
-                .forEach { filename -> if (regexFeature().matches(filename)) ++cntFeature }
-
-            var cntFeaturePerLastAudio = 0
-            File(DIR).list()
-                .forEach { filename -> if (regexFeaturePerLastAudio().matches(filename)) ++cntFeaturePerLastAudio }
+            getExternalFilesDir(Environment.DIRECTORY_MUSIC)?.list()?.let {
+                it.forEach { filename -> if (regexAudio().matches(filename)) ++cntAudio }
+                it.forEach { filename -> if (regexFeature().matches(filename)) ++cntFeature }
+                it.forEach { filename -> if (regexFeaturePerLastAudio().matches(filename)) ++cntFeaturePerLastAudio }
+            }
 
             runOnUiThread {
                 textViewFileCount.text = "$cntAudio-$cntFeaturePerLastAudio($cntFeature)"
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 
     private fun saveAudioAsWaveFile() {
@@ -159,12 +151,11 @@ class MainActivity : AppCompatActivity() {
         val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
         val formatted = current.format(formatter)
         mLastAudioFileName = "${classLabel()}-${formatted}"
-        val file = File(
-            DIR,
-            "${mLastAudioFileName}.wav"
-        )
-        savePCM(this, mRecordedAudio, file, mSamplingFreq)
-        fileCnt()
+        getExternalFilesDir(Environment.DIRECTORY_MUSIC)?.let {
+            val file = File(it, "${mLastAudioFileName}.wav")
+            savePCM(this, mRecordedAudio, file, mSamplingFreq)
+            fileCnt()
+        }
     }
 
     private fun showSettingDialog() {
@@ -298,12 +289,6 @@ class MainActivity : AppCompatActivity() {
         // Hide the navigation bar
         fullscreen()
 
-        // Directory check
-        val dir = File(DIR)
-        if (!dir.isDirectory && !dir.exists()) {
-            dir.mkdirs()
-        }
-
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
 
@@ -312,7 +297,7 @@ class MainActivity : AppCompatActivity() {
         // Load parameters from local preferences
         val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         mClassLabels =
-            prefs.getString("classLabels", "<Please register!>").split(",").toMutableList()
+            prefs.getString("classLabels", "<Please register!>")!!.split(",").toMutableList()
         mSamplingFreq = prefs.getInt("fs", SAMPLING_FREQS[1])
         mFftSize = prefs.getInt("fftSize", FFT_SIZES[2])
         mMelFilterbankSize = prefs.getInt("melFilterbankSize", MEL_FILTERBANK_SIZES[2])
@@ -488,24 +473,28 @@ class MainActivity : AppCompatActivity() {
                 jsonObject.put("mfsc", JSONArray(feature.mfsc))
 
                 var cntFeaturePerLastAudio = 0
-                File(DIR).list()
-                    .forEach { filename -> if (regexFeaturePerLastAudio().matches(filename)) ++cntFeaturePerLastAudio }
+                getExternalFilesDir(Environment.DIRECTORY_MUSIC)?.list()?.let {
+                    it.forEach { filename -> if (regexFeaturePerLastAudio().matches(filename)) ++cntFeaturePerLastAudio }
+                }
                 ++cntFeaturePerLastAudio
 
                 val filename = "${mLastAudioFileName}-${cntFeaturePerLastAudio}.json"
-                val file = File(DIR, filename)
-                file.writeText(jsonObject.toString())
 
-                fileCnt()
+                getExternalFilesDir(Environment.DIRECTORY_MUSIC)?.let {
+                    val file = File(it, filename)
+                    file.writeText(jsonObject.toString())
 
-                // Notify Android's media manager of the creation of new file
-                val contentUri: Uri = Uri.fromFile(file)
-                val mediaScanIntent = Intent(
-                    Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                    contentUri
-                )
-                this.sendBroadcast(mediaScanIntent)
-
+                    fileCnt()
+                    /*
+                    // Notify Android's media manager of the creation of new file
+                    val contentUri: Uri = Uri.fromFile(file)
+                    val mediaScanIntent = Intent(
+                        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                        contentUri
+                    )
+                    this.sendBroadcast(mediaScanIntent)
+                    */
+                }
             } else if (!mRecording and !switchSave.isChecked) {
                 runInference()
             }

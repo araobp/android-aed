@@ -1,6 +1,6 @@
 # Acoustic Event Detection with TensorFlow Lite
 
-This project is an Android version of my other project [acoustic features](https://github.com/araobp/acoustic-features).
+This project is an Android version of "acoustic feature camera" developed in my other project [acoustic features](https://github.com/araobp/acoustic-features).
 
 ![android_app](./doc/android_app.png)
 

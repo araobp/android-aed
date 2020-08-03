@@ -2,7 +2,7 @@
 
 The following "audio features" are screen shots of the android app that captured features of ["Shimauta"](https://en.wikipedia.org/wiki/Shima_Uta_(The_Boom_song)) song played by a popluar female singer.
 
-## Wave form of Sanshin
+## Wave form of Sanshin (Musical instruments for Okinawan music)
 
 ![](./doc/android_app_wave.png)
 

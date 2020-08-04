@@ -8,13 +8,13 @@ And [the other screenshots](./SCREENSHOTS.md).
 
 ## Android app "spectrogram"
 
-This app is for both train data collection and inference for acoustic event detection: [code](./android)
+This app is for both training CNN and running inference for acoustic event detection: [code](./android)
 
 I reused part of [this code](https://github.com/araobp/acoustic-features/tree/master/stm32/acoustic_feature_camera) that was written in C language by me for STM32 MCUs.
 
 The DSP part used [JTransforms](https://github.com/wendykierp/JTransforms).
 
-I confirmed that the app runs on LG Nexus 5X and Google Pixel4. The code is short and self-explanatory, but I must explain that the app saves all the feature files in JSON format under "/Android/media/audio.processing.spectrogram".
+I confirmed that the app runs on LG Nexus 5X and Google Pixel4. The code is short and self-explanatory, but I must explain that the app saves all the feature files in JSON format under "/Android/data/audio.processing.spectrogram/files/Music".
 
 I developed a color map function "Coral reef sea" on my own to convert grayscale image into a color of the sea in Okinawa.
 

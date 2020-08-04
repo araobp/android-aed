@@ -505,18 +505,7 @@ class MainActivity : AppCompatActivity() {
                 externalFilesDir?.let {
                     val file = File(it, filename)
                     file.writeText(jsonObject.toString())
-
                     fileCnt()
-                    /*
-
-                    // Notify Android's media manager of the creation of new file
-                    val contentUri: Uri = Uri.fromFile(file)
-                    val mediaScanIntent = Intent(
-                        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                        contentUri
-                    )
-                    this.sendBroadcast(mediaScanIntent)
-                    */
                 }
             } else if (!mRecording and !switchSave.isChecked) {
                 runInference()

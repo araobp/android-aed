@@ -94,16 +94,7 @@ fun savePCM(context: Context, rawPcmData: ShortArray, waveFile: File, samplingRa
         output = DataOutputStream(FileOutputStream(waveFile))
         output.write(header)
         output.write(rawData)
-
-        /*
-        // Notify Android's media manager of the creation of new file
-        val contentUri: Uri = Uri.fromFile(waveFile)
-        val mediaScanIntent = Intent(
-            Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-            contentUri
-        )
-        context.sendBroadcast(mediaScanIntent)
-         */
+        
     } catch (e: Exception) {
         e.printStackTrace()
     } finally {

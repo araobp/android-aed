@@ -7,8 +7,7 @@ import androidx.core.content.ContextCompat
 
 const val REQUEST_CODE_PERMISSIONS = 10
 val REQUIRED_PERMISSIONS = arrayOf(
-    Manifest.permission.RECORD_AUDIO,
-    Manifest.permission.WRITE_EXTERNAL_STORAGE
+    Manifest.permission.RECORD_AUDIO
 )
 
 /**

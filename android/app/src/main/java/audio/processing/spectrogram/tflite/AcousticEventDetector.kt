@@ -20,7 +20,6 @@ class AcousticEventDetector(
     private var labelProbArray: Array<FloatArray>? = null
 
     override fun getModelPath(): String {
-
         return MODEL_FILE
     }
 

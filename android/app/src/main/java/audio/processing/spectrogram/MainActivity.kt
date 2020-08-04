@@ -2,7 +2,6 @@ package audio.processing.spectrogram
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Canvas
 import android.graphics.Color
@@ -10,7 +9,6 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.media.*
 import android.media.audiofx.AutomaticGainControl
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -29,6 +27,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
+import java.io.IOException
+import java.io.InputStream
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.concurrent.thread
@@ -95,11 +95,12 @@ class MainActivity : AppCompatActivity() {
     private var mRecordedAudio = ShortArray(0)
 
     // Feature dimension
-    private var mFeatureCenter: Int = 0
+    private var mFeatureCenter: Int = 64
     private var mFeatureWidth: Int = 0
     private var mRatio: Float = 0F  // feature size to canvas size
 
     // Audio and feature filess
+    private var externalFilesDir: File? = null
     private var mLastAudioFileName = "X"
 
     private fun regexAudio() = Regex("[a-zA-Z0-9_\\-]+.wav")
@@ -108,6 +109,27 @@ class MainActivity : AppCompatActivity() {
 
     // Acoustic Event Detector
     private lateinit var mAcousticEventDetector: AcousticEventDetector
+
+    private fun loadDefaultLabels(): String {
+        var defaultLabels: String = "<Please register!>"
+        try {
+            val inputStream: InputStream = assets.open(AcousticEventDetector.CLASS_LABELS_FILE)
+            val size: Int = inputStream.available()
+            val buffer = ByteArray(size)
+            inputStream.read(buffer)
+            inputStream.close()
+            defaultLabels = String(buffer)
+            // Remove white spaces
+            defaultLabels = defaultLabels.replace("\\s+".toRegex(), ",")
+            // Replace new lines and return codes with commas
+            //defaultLabels = defaultLabels.replace("(\\r|\\n|\\r\\n)+".toRegex(), ",")
+            // Remove the last comma
+            if (defaultLabels.takeLast(1) == ",") defaultLabels = defaultLabels.dropLast(1)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return defaultLabels
+    }
 
     // Reset spectrogram
     private fun resetSpectrogram() {
@@ -135,15 +157,15 @@ class MainActivity : AppCompatActivity() {
         var cntFeature = 0
         var cntFeaturePerLastAudio = 0
 
-            getExternalFilesDir(Environment.DIRECTORY_MUSIC)?.list()?.let {
-                it.forEach { filename -> if (regexAudio().matches(filename)) ++cntAudio }
-                it.forEach { filename -> if (regexFeature().matches(filename)) ++cntFeature }
-                it.forEach { filename -> if (regexFeaturePerLastAudio().matches(filename)) ++cntFeaturePerLastAudio }
-            }
+        externalFilesDir?.list()?.let {
+            it.forEach { filename -> if (regexAudio().matches(filename)) ++cntAudio }
+            it.forEach { filename -> if (regexFeature().matches(filename)) ++cntFeature }
+            it.forEach { filename -> if (regexFeaturePerLastAudio().matches(filename)) ++cntFeaturePerLastAudio }
+        }
 
-            runOnUiThread {
-                textViewFileCount.text = "$cntAudio-$cntFeaturePerLastAudio($cntFeature)"
-            }
+        runOnUiThread {
+            textViewFileCount.text = "$cntAudio-$cntFeaturePerLastAudio($cntFeature)"
+        }
     }
 
     private fun saveAudioAsWaveFile() {
@@ -151,7 +173,7 @@ class MainActivity : AppCompatActivity() {
         val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
         val formatted = current.format(formatter)
         mLastAudioFileName = "${classLabel()}-${formatted}"
-        getExternalFilesDir(Environment.DIRECTORY_MUSIC)?.let {
+        externalFilesDir?.let {
             val file = File(it, "${mLastAudioFileName}.wav")
             savePCM(this, mRecordedAudio, file, mSamplingFreq)
             fileCnt()
@@ -294,16 +316,17 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        externalFilesDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
+
         // Load parameters from local preferences
         val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         mClassLabels =
-            prefs.getString("classLabels", "<Please register!>")!!.split(",").toMutableList()
+            prefs.getString("classLabels", loadDefaultLabels())!!.split(",").toMutableList()
         mSamplingFreq = prefs.getInt("fs", SAMPLING_FREQS[1])
         mFftSize = prefs.getInt("fftSize", FFT_SIZES[2])
         mMelFilterbankSize = prefs.getInt("melFilterbankSize", MEL_FILTERBANK_SIZES[2])
         mSpecLength = prefs.getInt("specLength", SPEC_LENGTHS[2])
         mFeatureWidth = prefs.getInt("featureWidth", FEATURE_WIDTHS[1])
-        mFeatureCenter = prefs.getInt("featureCenter", 64)
 
         val adapterClasses =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, mClassLabels)
@@ -468,24 +491,24 @@ class MainActivity : AppCompatActivity() {
                 jsonObject.put("fs", feature.fs)
                 jsonObject.put("fftSize", feature.fftSize)
                 jsonObject.put("melFilterbankSize", feature.melFilterbankSize)
-                jsonObject.put("featureCenter", mFeatureCenter)
                 jsonObject.put("featureWidth", mFeatureWidth)
                 jsonObject.put("mfsc", JSONArray(feature.mfsc))
 
                 var cntFeaturePerLastAudio = 0
-                getExternalFilesDir(Environment.DIRECTORY_MUSIC)?.list()?.let {
+                externalFilesDir?.list()?.let {
                     it.forEach { filename -> if (regexFeaturePerLastAudio().matches(filename)) ++cntFeaturePerLastAudio }
                 }
                 ++cntFeaturePerLastAudio
 
                 val filename = "${mLastAudioFileName}-${cntFeaturePerLastAudio}.json"
 
-                getExternalFilesDir(Environment.DIRECTORY_MUSIC)?.let {
+                externalFilesDir?.let {
                     val file = File(it, filename)
                     file.writeText(jsonObject.toString())
 
                     fileCnt()
                     /*
+
                     // Notify Android's media manager of the creation of new file
                     val contentUri: Uri = Uri.fromFile(file)
                     val mediaScanIntent = Intent(
@@ -568,14 +591,12 @@ class MainActivity : AppCompatActivity() {
             editor.putInt("melFilterbankSize", 40)  // 40 filters
             editor.putInt("specLength", 3)  // 3 sec
             editor.putInt("featureWidth", 64)  // 64 bins
-            editor.putInt("featureCenter", 64)
         } else {
             editor.putInt("fs", mSamplingFreq)
             editor.putInt("fftSize", mFftSize)
             editor.putInt("melFilterbankSize", mMelFilterbankSize)
             editor.putInt("specLength", mSpecLength)
             editor.putInt("featureWidth", mFeatureWidth)
-            editor.putInt("featureCenter", mFeatureCenter)
         }
         editor.apply()
     }
@@ -908,6 +929,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fullscreen() {
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
     }
 }

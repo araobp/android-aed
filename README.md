@@ -109,10 +109,6 @@ The steps taken for training a CNN model for Acoustic Event Detection is same as
    << Results >>
 ```
 
-## TODO
-
-I am working on integrating this Android app with the STM32 version [acoustic-features](https://github.com/araobp/acoustic-features).
-
 ## References
 
 ### Speech processing for machine learning

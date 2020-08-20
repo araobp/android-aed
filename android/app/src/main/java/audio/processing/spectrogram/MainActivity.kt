@@ -595,7 +595,6 @@ class MainActivity : AppCompatActivity() {
         canvas.drawColor(Color.BLACK)
         val ratioX = canvas.width.toFloat() / mBufRecord.size.toFloat()
         val offsetY = surfaceView.height / 2
-        var prevY = -mBufRecord[0] * SCALEDOWN + offsetY
 
         canvas.drawLine(
             0F,
@@ -604,16 +603,16 @@ class MainActivity : AppCompatActivity() {
             offsetY.toFloat(),
             mPaintDarkGrayStroke
         )
-        for (i in 1 until mBufRecord.size) {
+        for (i in mBufRecord.size - 1 downTo  1) {
             val y = -mBufRecord[i] * SCALEDOWN + offsetY
+            val yNext = -mBufRecord[i - 1] * SCALEDOWN + offsetY
             canvas.drawLine(
-                (i - 1).toFloat() * ratioX,
-                prevY,
-                i.toFloat() * ratioX,
+                (mBufRecord.size - i - 1).toFloat() * ratioX,
                 y,
+                (mBufRecord.size - i).toFloat() * ratioX,
+                yNext,
                 mPaintCyanStroke
             )
-            prevY = y
         }
         surfaceView.holder.unlockCanvasAndPost(canvas)
     }

@@ -54,13 +54,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // Paint objects
-    private lateinit var mPaintDarkGrayStroke: Paint
-    private lateinit var mPaintCyanStroke: Paint
-    private lateinit var mPaintGreenStroke: Paint
-    private lateinit var mPaintRedStroke: Paint
-    private lateinit var mPaintYellowFill: Paint
-
     // Screen rotation
     private var mCurrentRotaionDegrees = 0
 
@@ -333,31 +326,6 @@ class MainActivity : AppCompatActivity() {
         adapterClasses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerClasses.adapter = adapterClasses
 
-        mPaintDarkGrayStroke = Paint()
-        mPaintDarkGrayStroke.style = Paint.Style.STROKE
-        mPaintDarkGrayStroke.color = Color.DKGRAY
-        mPaintDarkGrayStroke.strokeWidth = 1F
-
-        mPaintCyanStroke = Paint()
-        mPaintCyanStroke.style = Paint.Style.STROKE
-        mPaintCyanStroke.color = Color.CYAN
-        mPaintCyanStroke.strokeWidth = 2F
-
-        mPaintGreenStroke = Paint()
-        mPaintGreenStroke.style = Paint.Style.STROKE
-        mPaintGreenStroke.color = Color.GREEN
-        mPaintGreenStroke.strokeWidth = 5F
-
-        mPaintRedStroke = Paint()
-        mPaintRedStroke.style = Paint.Style.STROKE
-        mPaintRedStroke.color = Color.RED
-        mPaintRedStroke.strokeWidth = 5F
-
-        mPaintYellowFill = Paint()
-        mPaintYellowFill.style = Paint.Style.FILL
-        mPaintYellowFill.color = Color.YELLOW
-        mPaintYellowFill.strokeWidth = 0F
-
         buttonSetting.setOnClickListener {
             showSettingDialog()
         }
@@ -372,32 +340,32 @@ class MainActivity : AppCompatActivity() {
         }
 
         radioButtonWave.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                if (!mRecording) drawWave()
+            if (isChecked && !mRecording) {
+                drawWave()
             }
         }
 
         radioButtonPSD.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                if (!mRecording) drawPsd()
+            if (isChecked && !mRecording) {
+                drawPsd()
             }
         }
 
         radioButtonSpectrogram.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                if (!mRecording) drawSpectrogram()
+            if (isChecked && !mRecording) {
+                drawSpectrogram()
             }
         }
 
         radioButtonMFSCs.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                if (!mRecording) drawMFSCs()
+            if (isChecked && !mRecording) {
+                drawMFSCs()
             }
         }
 
         radioButtonFilterbank.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                if (!mRecording) drawMelFilterbank()
+            if (isChecked && !mRecording) {
+                drawMelFilterbank()
             }
         }
 
@@ -575,17 +543,21 @@ class MainActivity : AppCompatActivity() {
             editor.putString("classLabels", mClassLabels.joinToString(","))
         }
         if (fallback) {
-            editor.putInt("fs", 44100)  // 44.1kHz
-            editor.putInt("fftSize", 512)  // 512 bins
-            editor.putInt("melFilterbankSize", 40)  // 40 filters
-            editor.putInt("specLength", 3)  // 3 sec
-            editor.putInt("featureWidth", 64)  // 64 bins
+            editor.apply {
+                putInt("fs", 44100)  // 44.1kHz
+                putInt("fftSize", 512)  // 512 bins
+                putInt("melFilterbankSize", 40)  // 40 filters
+                putInt("specLength", 3)  // 3 sec
+                putInt("featureWidth", 64)  // 64 bins
+            }
         } else {
-            editor.putInt("fs", mSamplingFreq)
-            editor.putInt("fftSize", mFftSize)
-            editor.putInt("melFilterbankSize", mMelFilterbankSize)
-            editor.putInt("specLength", mSpecLength)
-            editor.putInt("featureWidth", mFeatureWidth)
+            editor.apply {
+                putInt("fs", mSamplingFreq)
+                putInt("fftSize", mFftSize)
+                putInt("melFilterbankSize", mMelFilterbankSize)
+                putInt("specLength", mSpecLength)
+                putInt("featureWidth", mFeatureWidth)
+            }
         }
         editor.apply()
     }
@@ -658,11 +630,13 @@ class MainActivity : AppCompatActivity() {
         val x2 = (mFeatureCenter + featureWidthHalf) * mRatio
         val y1 = 3F
         val y2 = height - y1
-        canvas.drawLine(center, y1, center, y2, mPaintGreenStroke)
-        canvas.drawLine(x1, y1, x1, y2, mPaintRedStroke)
-        canvas.drawLine(x2, y1, x2, y2, mPaintRedStroke)
-        canvas.drawLine(x1, y1, x2, y1, mPaintRedStroke)
-        canvas.drawLine(x1, y2, x2, y2, mPaintRedStroke)
+        canvas.apply {
+            drawLine(center, y1, center, y2, mPaintGreenStroke)
+            drawLine(x1, y1, x1, y2, mPaintRedStroke)
+            drawLine(x2, y1, x2, y2, mPaintRedStroke)
+            drawLine(x1, y1, x2, y1, mPaintRedStroke)
+            drawLine(x1, y2, x2, y2, mPaintRedStroke)
+        }
     }
 
     private fun drawMFSCs() {
@@ -681,10 +655,11 @@ class MainActivity : AppCompatActivity() {
      *
      */
     private fun drawMelFilterbank() {
-        val paint = Paint()
-        paint.style = Paint.Style.STROKE
-        paint.strokeWidth = 1F
-        paint.color = Color.CYAN
+        val paint = Paint().apply {
+            style = Paint.Style.STROKE
+            strokeWidth = 1F
+            color = Color.CYAN
+        }
 
         val canvas = surfaceView.holder.lockCanvas()
         canvas.drawColor(Color.BLACK)

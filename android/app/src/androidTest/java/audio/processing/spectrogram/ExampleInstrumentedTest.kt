@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("audio.processing.spectrogram", appContext.packageName)
+        assertEquals("jp.araobp.aiwebcam.launcher", appContext.packageName)
     }
 }

@@ -1,8 +1,6 @@
 package audio.processing.spectrogram.dsp
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import java.io.DataOutputStream
 import java.io.File
 import java.io.FileOutputStream

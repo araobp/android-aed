@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAcousticEventDetector: AcousticEventDetector
 
     private fun loadDefaultLabels(): String {
-        var defaultLabels: String = "<Please register!>"
+        var defaultLabels = "<Please register!>"
         try {
             val inputStream: InputStream = assets.open(AcousticEventDetector.CLASS_LABELS_FILE)
             val size: Int = inputStream.available()
